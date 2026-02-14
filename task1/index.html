@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard - API Task 1</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1><i class="fas fa-cloud-sun"></i> Weather Dashboard</h1>
+            <p class="subtitle">Real-time weather information from around the world</p>
+            <div class="task-badge">Internship Task 1: API Integration</div>
+        </header>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-box">
+                <div class="input-group">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="city-input" placeholder="Enter city name (e.g., London, Tokyo, New York)">
+                </div>
+                <button id="search-btn" class="btn btn-primary">
+                    <i class="fas fa-search"></i> Search
+                </button>
+                <button id="location-btn" class="btn btn-secondary">
+                    <i class="fas fa-location-arrow"></i> Use My Location
+                </button>
+            </div>
+            
+            <div class="quick-cities">
+                <p>Quick Search:</p>
+                <div class="city-tags">
+                    <span class="city-tag" data-city="London">London</span>
+                    <span class="city-tag" data-city="New York">New York</span>
+                    <span class="city-tag" data-city="Tokyo">Tokyo</span>
+                    <span class="city-tag" data-city="Paris">Paris</span>
+                    <span class="city-tag" data-city="Delhi">Delhi</span>
+                    <span class="city-tag" data-city="Sydney">Sydney</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Current Weather -->
+            <div class="weather-card current-weather">
+                <div class="card-header">
+                    <h2><i class="fas fa-map-marker-alt"></i> Current Weather</h2>
+                    <div class="last-updated" id="last-updated">--:--:--</div>
+                </div>
+                
+                <div class="card-body">
+                    <div class="loading" id="loading">
+                        <div class="spinner"></div>
+                        <p>Fetching weather data...</p>
+                    </div>
+                    
+                    <div class="weather-data" id="weather-data">
+                        <div class="location">
+                            <h3 id="city-name">City Name</h3>
+                            <p id="country">Country</p>
+                            <p id="date-time">Date & Time</p>
+                        </div>
+                        
+                        <div class="weather-main">
+                            <div class="temp-section">
+                                <div class="temp-display">
+                                    <span id="temperature">0</span>
+                                    <span class="temp-unit">°C</span>
+                                </div>
+                                <div class="weather-condition">
+                                    <img id="weather-icon" src="https://openweathermap.org/img/wn/01d.png" alt="Weather Icon">
+                                    <p id="weather-description">Clear sky</p>
+                                </div>
+                            </div>
+                            
+                            <div class="weather-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-temperature-half"></i>
+                                    <div>
+                                        <p class="detail-label">Feels Like</p>
+                                        <p id="feels-like">0°C</p>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-droplet"></i>
+                                    <div>
+                                        <p class="detail-label">Humidity</p>
+                                        <p id="humidity">0%</p>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-wind"></i>
+                                    <div>
+                                        <p class="detail-label">Wind Speed</p>
+                                        <p id="wind-speed">0 m/s</p>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-gauge-high"></i>
+                                    <div>
+                                        <p class="detail-label">Pressure</p>
+                                        <p id="pressure">0 hPa</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="error-message" id="error-message">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>City Not Found</h3>
+                        <p>Please check the city name and try again.</p>
+                        <button id="retry-btn" class="btn btn-small">Retry</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Forecast -->
+            <div class="weather-card forecast-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-calendar-day"></i> 5-Day Forecast</h2>
+                </div>
+                <div class="forecast-container">
+                    <div class="forecast-loading" id="forecast-loading">
+                        <div class="spinner small"></div>
+                        <p>Loading forecast...</p>
+                    </div>
+                    <div class="forecast-days" id="forecast-days">
+                        <!-- Forecast will be inserted here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Card -->
+            <div class="info-card">
+                <h3><i class="fas fa-info-circle"></i> About This Project</h3>
+                <p>This is <strong>Internship Task 1: API Integration</strong>. The dashboard fetches real-time weather data from the OpenWeatherMap API.</p>
+                
+                <div class="features">
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Current weather data</li>
+                        <li><i class="fas fa-check"></i> 5-day weather forecast</li>
+                        <li><i class="fas fa-check"></i> Search by city name</li>
+                        <li><i class="fas fa-check"></i> Geolocation support</li>
+                        <li><i class="fas fa-check"></i> Responsive design</li>
+                    </ul>
+                </div>
+
+                <div class="api-info">
+                    <h4>API Information:</h4>
+                    <p><strong>API:</strong> OpenWeatherMap</p>
+                    <p><strong>Endpoint:</strong> api.openweathermap.org/data/2.5/weather</p>
+                    <p><strong>Data:</strong> Temperature, humidity, wind speed, etc.</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Full Stack Development Internship - Task 1: Weather API Integration</p>
+            <p>Data provided by <a href="https://openweathermap.org/" target="_blank">OpenWeatherMap</a></p>
+            <p class="github-link">
+                <i class="fab fa-github"></i> 
+                <a href="#" target="_blank">View Source Code</a>
+            </p>
+        </footer>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <span id="notification-text">Weather data loaded successfully!</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
